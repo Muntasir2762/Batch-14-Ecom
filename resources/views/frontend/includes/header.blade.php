@@ -1,7 +1,7 @@
 <header class="header-section">
     <div class="container">
         <div class="header-top-wrapper">
-            <a href="index.html" class="brand-logo-outer">
+            <a href="{{url('/')}}" class="brand-logo-outer">
                 <img src="{{asset('frontend/assets/images/logo.png')}}" alt="Logo">
             </a>
             <div class="search-form-outer">
@@ -50,8 +50,8 @@
                                 </h4>
                             </div>
                             <div class="shopping-cart-button">
-                                <a href="view-products.html" class="view-cart-link">View cart</a>
-                                <a href="checkout.html" class="checkout-link">Checkout</a>
+                                <a href="{{url('/view-cart')}}" class="view-cart-link">View cart</a>
+                                <a href="{{url('/checkout')}}" class="checkout-link">Checkout</a>
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                 <div class="header__dynamic-page-wrapper">
                     <ul class="dynamic-page-list">
                         <li class="dynamic-page-list-item">
-                            <a href="index.html" class="dynamic-page-list-item-link">
+                            <a href="{{url('/')}}" class="dynamic-page-list-item-link">
                                 Home
                             </a>
                         </li>
