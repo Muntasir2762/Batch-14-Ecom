@@ -6,6 +6,7 @@
   <title>Dashboard</title>
 
   @include('backend.includes.style')
+  @stack('css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -34,5 +35,7 @@
 <!-- ./wrapper -->
 
 @include('backend.includes.script')
+
+@stack('js')
 </body>
 </html>
