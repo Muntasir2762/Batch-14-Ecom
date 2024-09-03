@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AuthController;
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Auth;
@@ -24,3 +25,7 @@ Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('adm
 
 //Product Routes....
 Route::get('/admin/create-product', [ProductController::class, 'create'])->name('product.create');
+
+//Category Routes....
+Route::get('/admin/create-category', [CategoryController::class, 'create'])->name('category.create');
+Route::post('/admin/store-category', [CategoryController::class, 'store'])->name('category.store');
