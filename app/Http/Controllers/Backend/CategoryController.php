@@ -31,4 +31,23 @@ class CategoryController extends Controller
         $category->save();
         return redirect()->back();
     }
+
+    public function show ()
+    {
+        $categories = Category::get();
+        return view ('backend.category.list', compact('categories'));
+    }
+
+    public function delete ($id)
+    {
+        $category = Category::find($id);
+
+        if($category->image && file_exists('backend/images/category/'.$category->image)){
+            unlink('backend/images/category/'.$category->image);
+        }
+
+        $category->delete();
+
+        return redirect()->back();
+    }
 }
