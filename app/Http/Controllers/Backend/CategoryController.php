@@ -50,4 +50,33 @@ class CategoryController extends Controller
 
         return redirect()->back();
     }
+
+    public function edit ($id)
+    {
+        $category = Category::find($id);
+        return view ('backend.category.edit', compact('category'));
+    }
+
+    public function update (Request $request, $id)
+    {
+        $category = Category::find($id);
+
+        $category->name = $request->name;
+        $category->slug = Str::slug($request->name);
+
+        if(isset($request->image)){
+            
+            if($category->image && file_exists('backend/images/category/'.$category->image)){
+                unlink('backend/images/category/'.$category->image);
+            }
+
+            $imageName = rand().'-categoryupdate-'.'.'.$request->image->extension(); // 948675-categoryupdate-.jpg
+            $request->image->move('backend/images/category/', $imageName);
+            $category->image = $imageName;
+
+        }
+
+        $category->save();
+        return redirect('admin/show-category');
+    }
 }

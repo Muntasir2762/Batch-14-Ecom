@@ -31,3 +31,5 @@ Route::get('/admin/create-category', [CategoryController::class, 'create'])->nam
 Route::post('/admin/store-category', [CategoryController::class, 'store'])->name('category.store');
 Route::get('/admin/show-category', [CategoryController::class, 'show'])->name('category.show');
 Route::get('/admin/delete-category/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+Route::get('/admin/edit-category/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+Route::post('/admin/update-category/{id}', [CategoryController::class, 'update'])->name('category.update');
