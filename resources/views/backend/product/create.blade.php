@@ -50,6 +50,22 @@
                             </div>
                         </div>
                         <div class="col-md-6">
+                            <div class="form-group" id="color_fields">
+                                <label>Product Color (Optional)</label>
+                                <input type="text" name="color[]" id="color" value="" class="form-control"
+                                    placeholder="Enter Color">
+                            </div>
+                            <button type="button" class="btn btn-primary" id="add_color">Add More</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" id="size_fields">
+                                <label>Product Size (Optional)</label>
+                                <input type="text" name="size[]" id="size" value="" class="form-control"
+                                    placeholder="Enter Size">
+                            </div>
+                            <button type="button" class="btn btn-primary" id="add_size">Add More</button>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Product Quantity*</label>
                                 <input type="number" name="qty" value="" class="form-control"
@@ -104,6 +120,12 @@
                             <div class="form-group">
                                 <label>Product Image</label>
                                 <input type="file" accept="image/*" name="image" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Gallery Images</label>
+                                <input type="file" accept="image/*" name="galleryImage[]" multiple class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -289,6 +311,25 @@
             mode: "htmlmixed",
             theme: "monokai"
         });
+    })
+</script>
+
+
+{{-- Add more colors... --}}
+<script>
+    $(document).ready(function(){
+        $("#add_color").click(function(){
+            $("#color_fields").append('<input type="text" name="color[]" id="color" value="" class="form-control" placeholder="Enter Color">')
+        })
+    })
+</script>
+
+{{-- Add more colors... --}}
+<script>
+    $(document).ready(function(){
+        $("#add_size").click(function(){
+            $("#size_fields").append('<input type="text" name="size[]" id="size" value="" class="form-control" placeholder="Enter Size">')
+        })
     })
 </script>
 @endpush
