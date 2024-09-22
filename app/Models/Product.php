@@ -10,4 +10,30 @@ class Product extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function color ()
+    {
+        return $this->hasMany(Color::class, 'product_id', 'id');
+    }
+
+    public function size ()
+    {
+        return $this->hasMany(Size::class, 'product_id', 'id');
+    }
+
+    public function galleryImage ()
+    {
+        return $this->hasMany(GalleryImage::class, 'product_id', 'id');
+    }
+
+    public function category ()
+    {
+        return $this->belongsTo(Category::class, 'cat_id', 'id');
+    }
+
+    public function subCategory ()
+    {
+        return $this->belongsTo(Subcategory::class, 'sub_cat_id', 'id');
+    }
+
 }
