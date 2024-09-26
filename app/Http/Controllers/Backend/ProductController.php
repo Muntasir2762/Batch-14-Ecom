@@ -88,7 +88,53 @@ class ProductController extends Controller
 
     public function show ()
     {
-        $products = Product::get();
+        $products = Product::with('category', 'subCategory')->get();
         return view ('backend.product.show', compact('products'));
+    }
+
+    public function delete ($id)
+    {
+        $product = Product::where('id', $id)->first();
+
+        if($product->image && file_exists('backend/images/product/'.$product->image)){
+            unlink('backend/images/product/'.$product->image);
+        }
+
+        //Color Delete...
+        $colors = Color::where('product_id', $id)->get();
+
+        foreach($colors as $color){
+            $color->delete();
+        }
+
+        //Size Delete...
+        $sizes = Size::where('product_id', $id)->get();
+
+        foreach($sizes as $size){
+            $size->delete();
+        }
+
+        //GalleryImage Delete...
+        $galleryImages = GalleryImage::where('product_id', $id)->get();
+
+        foreach($galleryImages as $image){
+
+            if($image->image && file_exists('backend/images/galleryImage/'.$image->image)){
+                unlink('backend/images/galleryImage/'.$image->image);
+            }
+
+            $image->delete();
+        }
+
+        $product->delete();
+        return redirect()->back();
+    }
+
+    public function edit ($id)
+    {
+        $product = Product::with('color', 'size', 'galleryImage')->where('id', $id)->first();
+        $categories = Category::get();
+        $subCategories = Subcategory::get();
+        return view ('backend.product.edit', compact('product', 'categories', 'subCategories'));
     }
 }
