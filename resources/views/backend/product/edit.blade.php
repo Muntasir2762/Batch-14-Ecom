@@ -133,14 +133,14 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Product Image</label>
-                                <input type="file" accept="image/*" name="image" class="form-control" required>
+                                <input type="file" accept="image/*" name="image" class="form-control">
                             </div>
                             <img src="{{asset('backend/images/product/'.$product->image)}}" height="200" width="200">
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Gallery Images</label>
-                                <input type="file" accept="image/*" name="galleryImage[]" multiple class="form-control" required>
+                                <input type="file" accept="image/*" name="galleryImage[]" multiple class="form-control">
                             </div>
                             @foreach ($product->galleryImage as $image)
                             <img src="{{asset('backend/images/galleryImage/'.$image->image)}}" height="200" width="200">
