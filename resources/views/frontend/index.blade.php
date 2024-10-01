@@ -90,7 +90,7 @@
             @foreach ($hotProducts as $product)
             <div class="product__item-outer">
                 <div class="product__item-image-outer">
-                    <a href="{{url('/product/details')}}" class="product__item-image-inner">
+                    <a href="{{url('/product/details/'.$product->id)}}" class="product__item-image-inner">
                         <img src="{{asset('backend/images/product/'.$product->image)}}" alt="Product Image" />
                     </a>
                     <div class="product__item-add-cart-btn-outer">
@@ -100,12 +100,12 @@
                     </div>
                     <div class="product__type-badge-outer">
                         <span class="product__type-badge-inner">
-                            Hot
+                            {{ucfirst($product->product_type)}}
                         </span>
                     </div>
                 </div>
                 <div class="product__item-info-outer">
-                    <a href="{{url('/product/details')}}" class="product__item-name">
+                    <a href="{{url('/product/details/'.$product->id)}}" class="product__item-name">
                         {{$product->name}}
                     </a>
                     <div class="product__item-price-outer">
@@ -138,17 +138,17 @@
             @foreach ($newProducts as $product)
             <div class="product__item-outer">
                 <div class="product__item-image-outer">
-                    <a href="{{url('/product/details')}}" class="product__item-image-inner">
+                    <a href="{{url('/product/details/'.$product->id)}}" class="product__item-image-inner">
                         <img src="{{asset('backend/images/product/'.$product->image)}}" alt="Product Image" />
                     </a>
                     <div class="product__item-add-cart-btn-outer">
-                        <a href="{{url('/product/details')}}" class="product__item-add-cart-btn-inner">
+                        <a href="{{url('/product/details/'.$product->id)}}" class="product__item-add-cart-btn-inner">
                             Add to Cart
                         </a>
                     </div>
                     <div class="product__type-badge-outer">
                         <span class="product__type-badge-inner">
-                            New
+                            {{ucfirst($product->product_type)}}
                         </span>
                     </div>
                 </div>
@@ -186,17 +186,17 @@
             @foreach ($regularProducts as $product)
             <div class="product__item-outer">
                 <div class="product__item-image-outer">
-                    <a href="{{url('/product/details')}}" class="product__item-image-inner">
+                    <a href="{{url('/product/details/'.$product->id)}}" class="product__item-image-inner">
                         <img src="{{asset('backend/images/product/'.$product->image)}}" alt="Product Image" />
                     </a>
                     <div class="product__item-add-cart-btn-outer">
-                        <a href="{{url('/product/details')}}" class="product__item-add-cart-btn-inner">
+                        <a href="{{url('/product/details/'.$product->id)}}" class="product__item-add-cart-btn-inner">
                             Add to Cart
                         </a>
                     </div>
                     <div class="product__type-badge-outer">
                         <span class="product__type-badge-inner">
-                            Regular
+                            {{ucfirst($product->product_type)}}
                         </span>
                     </div>
                 </div>
@@ -234,17 +234,17 @@
            @foreach ($discountProducts as $product)
            <div class="product__item-outer">
             <div class="product__item-image-outer">
-                <a href="{{url('/product/details')}}" class="product__item-image-inner">
+                <a href="{{url('/product/details/'.$product->id)}}" class="product__item-image-inner">
                     <img src="{{asset('backend/images/product/'.$product->image)}}" alt="Product Image" />
                 </a>
                 <div class="product__item-add-cart-btn-outer">
-                    <a href="{{url('/product/details')}}" class="product__item-add-cart-btn-inner">
+                    <a href="{{url('/product/details/'.$product->id)}}" class="product__item-add-cart-btn-inner">
                         Add to Cart
                     </a>
                 </div>
                 <div class="product__type-badge-outer">
                     <span class="product__type-badge-inner">
-                        Discount
+                        {{ucfirst($product->product_type)}}
                     </span>
                 </div>
             </div>

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 //Frontend
 Route::get('/', [FrontendController::class, 'index']);
-Route::get('/product/details', [FrontendController::class, 'productDetails']);
+Route::get('/product/details/{id}', [FrontendController::class, 'productDetails']);
 Route::get('/view-cart', [FrontendController::class, 'viewCart']);
 Route::get('/checkout', [FrontendController::class, 'checkout']);
 
