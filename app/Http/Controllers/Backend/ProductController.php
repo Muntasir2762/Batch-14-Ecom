@@ -82,6 +82,7 @@ class ProductController extends Controller
         }
 
 
+        toastr()->success('Successfully added!');
         return redirect()->back();
 
     }
