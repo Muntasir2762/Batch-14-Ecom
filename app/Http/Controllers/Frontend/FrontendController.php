@@ -68,4 +68,55 @@ class FrontendController extends Controller
         }
 
     }
+
+    public function addToCartDetails (Request $request, $id)
+    {
+        $cartProduct = Cart::where('product_id', $id)->where('ip_address', $request->ip())->first();
+        $product = Product::find($id);
+
+        if($cartProduct == null){
+            $cart = new Cart();
+
+            $cart->ip_address = $request->ip();
+            $cart->product_id = $product->id;
+            $cart->qty = $request->qty;
+            $cart->size = $request->size;
+            $cart->color = $request->color;
+            if($product->discount_price != null){
+                $cart->price = $product->discount_price;
+            }
+    
+            if($product->discount_price == null){
+                $cart->price = $product->regular_price;
+            }
+
+            
+            $cart->save();
+            if($request->action == "addToCart"){
+                toastr()->success('Successfully added to cart!');
+                return redirect()->back();
+            }
+
+            else if($request->action == "buyNow"){
+                toastr()->success('Successfully added to cart!');
+                return redirect('/checkout');
+            }
+        }
+
+        if($cartProduct != null)
+        {
+            $cartProduct->qty = $cartProduct->qty+$request->qty;
+            $cartProduct->save();
+
+            if($request->action == "addToCart"){
+                toastr()->success('Successfully added to cart!');
+                return redirect()->back();
+            }
+
+            else if($request->action == "buyNow"){
+                toastr()->success('Successfully added to cart!');
+                return redirect('/checkout');
+            }
+        }
+    }
 }

@@ -37,7 +37,8 @@
                                     </span>
                                 </div>
                                 
-                                <form action="" method="POST">
+                                <form action="{{url('/add-to-cart/details/'.$product->id)}}" method="POST">
+                                    @csrf
                                     <div class="product-details-select-items-wrap">
                                         @foreach ($product->color as $color)
                                         <div class="product-details-select-item-outer">
@@ -154,3 +155,25 @@
     </div>
 </section>
 @endsection
+
+@push('js')
+    <script>
+        var qtyInput = document.getElementById('qty');
+
+        var plusBtn = document.querySelector('.increment-btn');
+        var minusBtn = document.querySelector('.decrement-btn');
+
+        plusBtn.addEventListener('click', function(){
+            if(parseInt(qtyInput.value) < 5){
+                qtyInput.value = parseInt(qtyInput.value) + 1;
+            }
+        })
+
+        minusBtn.addEventListener('click', function(){
+            if(parseInt(qtyInput.value) > 1){
+                qtyInput.value = parseInt(qtyInput.value) - 1;
+            }
+        })
+
+    </script>
+@endpush
