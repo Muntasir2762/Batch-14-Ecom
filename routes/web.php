@@ -18,6 +18,10 @@ Route::get('/checkout', [FrontendController::class, 'checkout']);
 Route::get('/add-to-cart/{id}', [FrontendController::class, 'addToCart']);
 Route::post('/add-to-cart/details/{id}', [FrontendController::class, 'addToCartDetails']);
 
+//Category Products...
+Route::get('/category-products/{slug}/{id}', [FrontendController::class, 'categoryProducts']);
+Route::get('/subcategory-products/{slug}/{id}', [FrontendController::class, 'subCategoryProducts']);
+
 Auth::routes();
 
 // Admin Login Url

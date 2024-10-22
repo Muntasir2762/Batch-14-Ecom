@@ -7,19 +7,23 @@
         <div class="home__slider-sec-wrap">
             <div class="home__category-outer">
                 <ul class="header__category-list">
+                    @foreach ($allCategories as $category)
                     <li class="header__category-list-item item-has-submenu">
-                        <a href="category-product.html" class="header__category-list-item-link">
-                            <img src="{{asset('frontend/assets/images/product.png')}}" alt="category">
-                            Test Category
+                        <a href="{{url('category-products/'.$category->slug.'/'.$category->id)}}" class="header__category-list-item-link">
+                            <img src="{{asset('backend/images/category/'.$category->image)}}" alt="category">
+                            {{$category->name}}
                         </a>
                         <ul class="header__nav-item-category-submenu">
+                            @foreach ($category->subCategory as $subCategory)
                             <li class="header__category-submenu-item">
-                                <a href="sub-category-product.html" class="header__category-submenu-item-link">
-                                    Test Subcategory
+                                <a href="{{url('subcategory-products/'.$subCategory->slug.'/'.$subCategory->id)}}" class="header__category-submenu-item-link">
+                                    {{$subCategory->name}}
                                 </a>
                             </li>
+                            @endforeach
                         </ul>
                     </li>
+                    @endforeach
                 </ul>
             </div>
             <div class="home__slider-items-wrapper">
@@ -41,13 +45,15 @@
             </h1>
         </div>
         <div class="categoris-items-wrapper owl-carousel">
-            <a href="#" class="categoris-item">
-                <img src="{{asset('frontend/assets/images/product.png')}}" alt="category" />
+            @foreach ($allCategories as $category)
+            <a href="{{url('category-products/'.$category->slug.'/'.$category->id)}}" class="categoris-item">
+                <img src="{{asset('backend/images/category/'.$category->image)}}" alt="category" />
                 <h6 class="categoris-name">
-                    Test Category
+                    {{$category->name}}
                 </h6>
-                <span class="items-number">1 items</span>
+                {{-- <span class="items-number">1 items</span> --}}
             </a>
+            @endforeach
         </div>
     </div>
 </section>
