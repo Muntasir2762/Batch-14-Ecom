@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -127,6 +128,29 @@ class FrontendController extends Controller
                 return redirect('/checkout');
             }
         }
+    }
+
+    public function confirmOrder (Request $request)
+    {
+        $order = new Order();
+
+        $previousOrder = Order::orderBy('id', 'desc')->first();
+
+        if($previousOrder == null){
+            $order->invoiceId = "XYZ-1";
+        }
+        else{
+            $order->invoiceId = "XYZ-".$previousOrder->id+1;
+        }
+        $order->c_name = $request->c_name;
+        $order->c_phone = $request->c_phone;
+        $order->address = $request->address;
+        $order->area = $request->area;
+        $order->price = $request->inputGrandTotal;
+
+        $order->save();
+        toastr()->success('Order has been placed successfully!');
+        return redirect()->back();
     }
 
 
