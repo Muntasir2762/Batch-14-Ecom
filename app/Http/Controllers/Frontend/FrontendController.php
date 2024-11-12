@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\OrderDetails;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -137,10 +138,12 @@ class FrontendController extends Controller
         $previousOrder = Order::orderBy('id', 'desc')->first();
 
         if($previousOrder == null){
-            $order->invoiceId = "XYZ-1";
+            $generatedInvoiceId = "XYZ-1";
+            $order->invoiceId = $generatedInvoiceId;
         }
         else{
-            $order->invoiceId = "XYZ-".$previousOrder->id+1;
+            $generatedInvoiceId = "XYZ-".$previousOrder->id+1;
+            $order->invoiceId = $generatedInvoiceId;
         }
         $order->c_name = $request->c_name;
         $order->c_phone = $request->c_phone;
@@ -148,9 +151,37 @@ class FrontendController extends Controller
         $order->area = $request->area;
         $order->price = $request->inputGrandTotal;
 
-        $order->save();
+        $cartProducts = Cart::where('ip_address', $request->ip())->get();
+        if($cartProducts->isNotEmpty()){
+            $order->save();
+
+            foreach($cartProducts as $cart){
+                $orderDetails = new OrderDetails();
+
+                $orderDetails->order_id = $order->id;
+                $orderDetails->product_id = $cart->product_id;
+                $orderDetails->size = $cart->size;
+                $orderDetails->color = $cart->color;
+                $orderDetails->qty = $cart->qty;
+                $orderDetails->price = $cart->price;
+
+                $orderDetails->save();
+                $cart->delete();
+
+            }
+        }
+        else{
+            toastr()->warning('No products in your cart!!');
+            return redirect()->back();
+        }
+
         toastr()->success('Order has been placed successfully!');
-        return redirect()->back();
+        return redirect('order-confirmed/'.$generatedInvoiceId);
+    }
+
+    public function thankYouPage ($invoiceId)
+    {
+        return view ('frontend.thankyou', compact('invoiceId'));
     }
 
 
