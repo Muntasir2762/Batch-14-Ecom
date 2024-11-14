@@ -20,6 +20,7 @@ Route::get('/add-to-cart/delete/{id}', [FrontendController::class, 'addToCartDel
 Route::post('/add-to-cart/details/{id}', [FrontendController::class, 'addToCartDetails']);
 Route::post('/confirm-order', [FrontendController::class, 'confirmOrder']);
 Route::get('/order-confirmed/{invoiceId}', [FrontendController::class, 'thankYouPage']);
+Route::get('/shop-products', [FrontendController::class, 'shopProducts']);
 
 //Category Products...
 Route::get('/category-products/{slug}/{id}', [FrontendController::class, 'categoryProducts']);
