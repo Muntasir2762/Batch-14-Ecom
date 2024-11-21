@@ -212,4 +212,27 @@ class FrontendController extends Controller
         $productsCount = $products->count();
         return view ('frontend.shop', compact('products', 'productsCount'));
     }
+
+
+    //Policy Pages....
+
+    public function privacyPolicy ()
+    {
+        return view ('frontend.privacy-policy');
+    }
+
+    public function termsConditions ()
+    {
+        return view ('frontend.terms-conditions');
+    }
+
+    public function refundPolicy ()
+    {
+        return view ('frontend.refund-policy');
+    }
+
+    public function paymentPolicy ()
+    {
+        return view ('frontend.payment-policy');
+    }
 }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('policies', function (Blueprint $table) {
             $table->id();
-            $table->longText('privacy_plicy')->nullable();
+            $table->longText('privacy_policy')->nullable();
             $table->longText('terms_conditions')->nullable();
             $table->longText('refund_policy')->nullable();
             $table->longText('payment_policy')->nullable();

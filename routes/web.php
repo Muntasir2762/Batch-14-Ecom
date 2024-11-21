@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\SiteSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +22,10 @@ Route::post('/add-to-cart/details/{id}', [FrontendController::class, 'addToCartD
 Route::post('/confirm-order', [FrontendController::class, 'confirmOrder']);
 Route::get('/order-confirmed/{invoiceId}', [FrontendController::class, 'thankYouPage']);
 Route::get('/shop-products', [FrontendController::class, 'shopProducts']);
+Route::get('/privacy-policy', [FrontendController::class, 'privacyPolicy']);
+Route::get('/terms-conditions', [FrontendController::class, 'termsConditions']);
+Route::get('/refund-policy', [FrontendController::class, 'refundPolicy']);
+Route::get('/payment-policy', [FrontendController::class, 'paymentPolicy']);
 
 //Category Products...
 Route::get('/category-products/{slug}/{id}', [FrontendController::class, 'categoryProducts']);
@@ -57,3 +62,7 @@ Route::get('/admin/show-subcategory', [SubCategoryController::class, 'show'])->n
 Route::get('/admin/delete-subcategory/{id}', [SubCategoryController::class, 'delete'])->name('subcategory.delete');
 Route::get('/admin/edit-subcategory/{id}', [SubCategoryController::class, 'edit'])->name('subcategory.edit');
 Route::post('/admin/update-subcategory/{id}', [SubCategoryController::class, 'update'])->name('subcategory.update');
+
+//Site Settings & Policies....
+Route::get('/admin/site-settings', [SiteSettingController::class, 'showSettings']);
+Route::post('/admin/site-settings/update', [SiteSettingController::class, 'updateSettings']);
