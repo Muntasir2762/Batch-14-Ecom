@@ -119,7 +119,7 @@
                         </li>
                         </li>
                         <li class="dynamic-page-list-item">
-                            <a href="return-process.html" class="dynamic-page-list-item-link">
+                            <a href="{{url('/return-product')}}" class="dynamic-page-list-item-link">
                                 Return Process
                             </a>
                         </li>

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\ContactMessage;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
+use App\Models\ReturnRequest;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -234,5 +236,65 @@ class FrontendController extends Controller
     public function paymentPolicy ()
     {
         return view ('frontend.payment-policy');
+    }
+
+    public function aboutUs ()
+    {
+        return view ('frontend.about-us');
+    }
+
+
+    public function typeProducts ($type)
+    {
+        $products = Product::where('product_type', $type)->get();
+        $productCount = $products->count();
+        return view ('frontend.type-products', compact('products', 'type', 'productCount'));
+    }
+
+    public function showReturnForm ()
+    {
+        return view ('frontend.return-product');
+    }
+
+    public function storeReturnRequest (Request $request)
+    {
+        $returnRequest = new ReturnRequest();
+
+        $returnRequest->c_name = $request->c_name;
+        $returnRequest->c_phone = $request->c_phone;
+        $returnRequest->address = $request->address;
+        $returnRequest->issue = $request->issue;
+        $returnRequest->order_id = $request->order_id;
+        
+        if(isset($request->image)){
+            $imageName = rand().'-return-'.'.'.$request->image->extension();  // 948675-return-.jpg
+            $request->image->move('backend/images/return/', $imageName);
+
+            $returnRequest->image = $imageName;
+        }
+
+        $returnRequest->save();
+        toastr()->success('Request has been sent successfully!');
+        return redirect()->back();
+    }
+
+    public function showContactForm ()
+    {
+        return view ('frontend.contact-form');
+    }
+
+    public function storeContactForm (Request $request)
+    {
+        $contactMessage = new ContactMessage();
+
+        $contactMessage->name = $request->name;
+        $contactMessage->phone = $request->phone;
+        $contactMessage->email = $request->email;
+        $contactMessage->subject = $request->subject;
+        $contactMessage->message = $request->message;
+
+        $contactMessage->save();
+        toastr()->success('Message has been sent successfully!');
+        return redirect()->back();
     }
 }

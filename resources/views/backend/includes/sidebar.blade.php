@@ -154,6 +154,12 @@
                   <p>Payment Policy</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{url('/admin/show/about-us')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>About Us</p>
+                </a>
+              </li>
             </ul>
           </li>
 
