@@ -27,6 +27,7 @@ Route::get('/terms-conditions', [FrontendController::class, 'termsConditions']);
 Route::get('/refund-policy', [FrontendController::class, 'refundPolicy']);
 Route::get('/payment-policy', [FrontendController::class, 'paymentPolicy']);
 Route::get('/about-us', [FrontendController::class, 'aboutUs']);
+Route::get('/search-products', [FrontendController::class, 'searchProduct']);
 
 //Category Products...
 Route::get('/category-products/{slug}/{id}', [FrontendController::class, 'categoryProducts']);

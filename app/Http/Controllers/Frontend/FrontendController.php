@@ -297,4 +297,12 @@ class FrontendController extends Controller
         toastr()->success('Message has been sent successfully!');
         return redirect()->back();
     }
+
+    //Search Products....
+    public function searchProduct (Request $request)
+    {
+        $products = Product::where('name', 'LIKE', '%' .$request->search. '%')->get();
+        $productsCount = $products->count();
+        return view ('frontend.searched-products', compact('products', 'productsCount'));
+    }
 }
