@@ -11,7 +11,6 @@ class OrderController extends Controller
     public function shoAllOrders ()
     {
         $orders = Order::with('orderDetails')->get();
-        //dd($orders);
         return view ('backend.order.all-orders', compact('orders'));
     }
 }

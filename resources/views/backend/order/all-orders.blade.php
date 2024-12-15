@@ -21,113 +21,34 @@
         </thead>
         <tbody>
 
+        @foreach ($orders as $order)
         <tr>
-            <td>1</td>
-            <td>XY-4</td>
-            <td>
-                <img src="https://dummyimage.com/100x100/000000/fff">
-                2 X Dell Keyboard <br><br>
-
-                <img src="https://dummyimage.com/100x100/000000/fff">
-                1 X Smart Watch <br><br>
-            </td>
-            <td>
-                Name: Developer Test <br>
-                Phone: 0890237592 <br>
-                Address: Uttara, Dhaka <br>
-            </td>
-            <td>Not Found</td>
-            <td>
-                <a href="#" class="btn btn-danger">Cancel</a>
-                <a href="#" class="btn btn-success">Confirm</a>
-                <a href="#" class="btn btn-info">Delivered</a>
-            </td>
-            <td>
-              <a href="#" class="btn btn-primary">Edit</a>
-              <a href="#}" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
-
-        <tr>
-            <td>1</td>
-            <td>XY-4</td>
-            <td>
-                <img src="https://dummyimage.com/100x100/000000/fff">
-                2 X Dell Keyboard <br><br>
-
-                <img src="https://dummyimage.com/100x100/000000/fff">
-                1 X Smart Watch <br><br>
-            </td>
-            <td>
-                Name: Developer Test <br>
-                Phone: 0890237592 <br>
-                Address: Uttara, Dhaka <br>
-            </td>
-            <td>Not Found</td>
-            <td>
-                <a href="#" class="btn btn-danger">Cancel</a>
-                <a href="#" class="btn btn-success">Confirm</a>
-                <a href="#" class="btn btn-info">Delivered</a>
-            </td>
-            <td>
-              <a href="#" class="btn btn-primary">Edit</a>
-              <a href="#}" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
-
-        <tr>
-            <td>1</td>
-            <td>XY-4</td>
-            <td>
-                <img src="https://dummyimage.com/100x100/000000/fff">
-                2 X Dell Keyboard <br><br>
-
-                <img src="https://dummyimage.com/100x100/000000/fff">
-                1 X Smart Watch <br><br>
-            </td>
-            <td>
-                Name: Developer Test <br>
-                Phone: 0890237592 <br>
-                Address: Uttara, Dhaka <br>
-            </td>
-            <td>Not Found</td>
-            <td>
-                <a href="#" class="btn btn-danger">Cancel</a>
-                <a href="#" class="btn btn-success">Confirm</a>
-                <a href="#" class="btn btn-info">Delivered</a>
-            </td>
-            <td>
-              <a href="#" class="btn btn-primary">Edit</a>
-              <a href="#}" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
-
-        <tr>
-            <td>1</td>
-            <td>XY-4</td>
-            <td>
-                <img src="https://dummyimage.com/100x100/000000/fff">
-                2 X Dell Keyboard <br><br>
-
-                <img src="https://dummyimage.com/100x100/000000/fff">
-                1 X Smart Watch <br><br>
-            </td>
-            <td>
-                Name: Developer Test <br>
-                Phone: 0890237592 <br>
-                Address: Uttara, Dhaka <br>
-            </td>
-            <td>Not Found</td>
-            <td>
-                <a href="#" class="btn btn-danger">Cancel</a>
-                <a href="#" class="btn btn-success">Confirm</a>
-                <a href="#" class="btn btn-info">Delivered</a>
-            </td>
-            <td>
-              <a href="#" class="btn btn-primary">Edit</a>
-              <a href="#}" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
+          <td>{{$loop->index+1}}</td>
+          <td>{{$order->invoiceId}}</td>
+          <td>
+              @foreach ( $order->orderDetails as $details)
+                <img src="{{asset('backend/images/product/'.$details->product->image)}}" height="100" width="100">
+                {{$details->qty}} X {{$details->product->name}} <br><br>
+              @endforeach
+          </td>
+          <td>
+              Name:  {{$order->c_name}}<br>
+              Phone: {{$order->c_phone}} <br>
+              Address: {{$order->address}} <br>
+              Price: {{$order->price}} <br>
+          </td>
+          <td>Not Found</td>
+          <td>
+              <a href="#" class="btn btn-danger">Cancel</a>
+              <a href="#" class="btn btn-success">Confirm</a>
+              <a href="#" class="btn btn-info">Delivered</a>
+          </td>
+          <td>
+            <a href="#" class="btn btn-primary">Edit</a>
+            <a href="#" class="btn btn-danger">Delete</a>
+          </td>
+      </tr>
+        @endforeach
 
         </tbody>
       </table>
