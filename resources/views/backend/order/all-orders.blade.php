@@ -15,6 +15,7 @@
           <th>Product</th>
           <th>Customer Info</th>
           <th>Courier Name</th>
+          <th>Current Status</th>
           <th>Status</th>
           <th>Action</th>
         </tr>
@@ -39,9 +40,12 @@
           </td>
           <td>Not Found</td>
           <td>
-              <a href="#" class="btn btn-danger">Cancel</a>
-              <a href="#" class="btn btn-success">Confirm</a>
-              <a href="#" class="btn btn-info">Delivered</a>
+            <span class="badge badge-success">{{ucfirst($order->status)}}</span>
+          </td>
+          <td>
+              <a href="{{url('/admin/order/status/'.$order->id.'/cancelled')}}" class="btn btn-danger">Cancel</a>
+              <a href="{{url('/admin/order/status/'.$order->id.'/confirmed')}}" class="btn btn-success">Confirm</a>
+              <a href="{{url('/admin/order/status/'.$order->id.'/delivered')}}" class="btn btn-info">Delivered</a>
           </td>
           <td>
             <a href="#" class="btn btn-primary">Edit</a>
