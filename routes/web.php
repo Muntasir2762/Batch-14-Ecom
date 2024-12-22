@@ -96,3 +96,5 @@ Route::post('/admin/update/about-us', [SiteSettingController::class, 'updateAbou
 Route::get('/admin/all-orders', [OrderController::class, 'shoAllOrders']);
 Route::get('/admin/order/status/{order_id}/{status_type}', [OrderController::class, 'updateStatus']);
 Route::get('/admin/status-orders/{status_type}', [OrderController::class, 'statusWiseOrder']);
+Route::get('/admin/order/edit/{id}', [OrderController::class, 'editOrder']);
+Route::post('/admin/order/update/{id}', [OrderController::class, 'updateOrder']);

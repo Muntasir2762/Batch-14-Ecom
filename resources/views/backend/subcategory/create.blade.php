@@ -3,15 +3,15 @@
 @section('content')
     <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
-        <form action="{{route('subcategory.store')}}" method="POST" enctype="multipart/form-data" class="form-control">
+        <form action="{{ route('subcategory.store') }}" method="POST" enctype="multipart/form-data" class="form-control">
             @csrf
-        <div class="card card-default">
-            <div class="card-header">
-                <h3 class="card-title">Add New SubCategory</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <div class="row">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Add New SubCategory</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Sub Category Name*</label>
@@ -19,28 +19,28 @@
                                     placeholder="Enter category name*" required>
                             </div>
                         </div>
-                    
+
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Select Category</label>
                                 <select name="cat_id" class="form-control">
                                     <option value="" selected disabled>Select Category</option>
                                     @foreach ($categories as $category)
-                                     <option value="{{$category->id}}">{{$category->name}}</option>
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-    
+
                         <div class="col-md-12">
                             <div class="form-group">
                                 <input type="submit" value="Submit" class="form-control btn btn-success">
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
     </div>
 @endsection
 
@@ -205,16 +205,16 @@
         })
     </script>
 
-<script>
-    $(function() {
-        // Summernote
-        $('#summernote2').summernote()
+    <script>
+        $(function() {
+            // Summernote
+            $('#summernote2').summernote()
 
-        // CodeMirror
-        CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
-            mode: "htmlmixed",
-            theme: "monokai"
-        });
-    })
-</script>
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+        })
+    </script>
 @endpush
