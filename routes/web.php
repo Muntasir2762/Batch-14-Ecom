@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SiteSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -103,3 +104,10 @@ Route::post('/admin/order/update/{id}', [OrderController::class, 'updateOrder'])
 //Credentials...
 Route::get('/admin/show-credentials', [AuthController::class, 'showCredentials']);
 Route::post('/admin/update-credentials', [AuthController::class, 'updateCredentials']);
+
+//Employees...
+Route::get('/admin/show-employees', [RoleController::class, 'showEmployee']);
+Route::get('/admin/create-employees', [RoleController::class, 'createEmployee']);
+Route::post('/admin/store-employees', [RoleController::class, 'storeEmployee']);
+Route::get('/admin/edit-employees/{id}', [RoleController::class, 'editEmployee']);
+Route::post('/admin/update-employees/{id}', [RoleController::class, 'updateEmployee']);
