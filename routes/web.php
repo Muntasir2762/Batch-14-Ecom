@@ -49,65 +49,81 @@ Route::get('/admin/login', [AuthController::class, 'adminLogin'])->name('adminLo
 Route::get('/admin/logout', [AuthController::class, 'adminLogout'])->name('adminLogout');
 
 // Admin Panel
-Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('adminDashboard');
+Route::middleware(['role:admin,employee,editor'])->group(function (){
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('adminDashboard');
+});
 
-//Product Routes....
-Route::get('/admin/create-product', [ProductController::class, 'create'])->name('product.create');
-Route::post('/admin/store-product', [ProductController::class, 'store'])->name('product.store');
-Route::get('/admin/show-products', [ProductController::class, 'show'])->name('product.show');
-Route::get('/admin/delete-product/{id}', [ProductController::class, 'delete'])->name('product.delete');
-Route::get('/admin/edit-product/{id}', [ProductController::class, 'edit'])->name('product.edit');
-Route::post('/admin/update-product/{id}', [ProductController::class, 'update'])->name('product.update');
+Route::middleware(['role:admin,editor'])->group(function (){
+    //Product Routes....
+    Route::get('/admin/create-product', [ProductController::class, 'create'])->name('product.create');
+    Route::post('/admin/store-product', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/admin/show-products', [ProductController::class, 'show'])->name('product.show');
+    Route::get('/admin/delete-product/{id}', [ProductController::class, 'delete'])->name('product.delete');
+    Route::get('/admin/edit-product/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('/admin/update-product/{id}', [ProductController::class, 'update'])->name('product.update');
+});
 
-//Category Routes....
-Route::get('/admin/create-category', [CategoryController::class, 'create'])->name('category.create');
-Route::post('/admin/store-category', [CategoryController::class, 'store'])->name('category.store');
-Route::get('/admin/show-category', [CategoryController::class, 'show'])->name('category.show');
-Route::get('/admin/delete-category/{id}', [CategoryController::class, 'delete'])->name('category.delete');
-Route::get('/admin/edit-category/{id}', [CategoryController::class, 'edit'])->name('category.edit');
-Route::post('/admin/update-category/{id}', [CategoryController::class, 'update'])->name('category.update');
 
-//SubCategory Routes...
-Route::get('/admin/create-subcategory', [SubCategoryController::class, 'create'])->name('subcategory.create');
-Route::post('/admin/store-subcategory', [SubCategoryController::class, 'store'])->name('subcategory.store');
-Route::get('/admin/show-subcategory', [SubCategoryController::class, 'show'])->name('subcategory.show');
-Route::get('/admin/delete-subcategory/{id}', [SubCategoryController::class, 'delete'])->name('subcategory.delete');
-Route::get('/admin/edit-subcategory/{id}', [SubCategoryController::class, 'edit'])->name('subcategory.edit');
-Route::post('/admin/update-subcategory/{id}', [SubCategoryController::class, 'update'])->name('subcategory.update');
+Route::middleware(['role:admin'])->group(function (){
+    //Category Routes....
+    Route::get('/admin/create-category', [CategoryController::class, 'create'])->name('category.create');
+    Route::post('/admin/store-category', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('/admin/show-category', [CategoryController::class, 'show'])->name('category.show');
+    Route::get('/admin/delete-category/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+    Route::get('/admin/edit-category/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::post('/admin/update-category/{id}', [CategoryController::class, 'update'])->name('category.update');
+
+    //SubCategory Routes...
+    Route::get('/admin/create-subcategory', [SubCategoryController::class, 'create'])->name('subcategory.create');
+    Route::post('/admin/store-subcategory', [SubCategoryController::class, 'store'])->name('subcategory.store');
+    Route::get('/admin/show-subcategory', [SubCategoryController::class, 'show'])->name('subcategory.show');
+    Route::get('/admin/delete-subcategory/{id}', [SubCategoryController::class, 'delete'])->name('subcategory.delete');
+    Route::get('/admin/edit-subcategory/{id}', [SubCategoryController::class, 'edit'])->name('subcategory.edit');
+    Route::post('/admin/update-subcategory/{id}', [SubCategoryController::class, 'update'])->name('subcategory.update');
+});
 
 //Site Settings & Policies....
-Route::get('/admin/site-settings', [SiteSettingController::class, 'showSettings']);
-Route::post('/admin/site-settings/update', [SiteSettingController::class, 'updateSettings']);
+Route::middleware(['role:admin,editor'])->group(function (){
+    Route::get('/admin/site-settings', [SiteSettingController::class, 'showSettings']);
+    Route::post('/admin/site-settings/update', [SiteSettingController::class, 'updateSettings']);
 
-Route::get('/admin/show/privacy-policy', [SiteSettingController::class, 'showPrivacyPolicy']);
-Route::post('/admin/update/privacy-policy', [SiteSettingController::class, 'updatePrivacyPolicy']);
+    Route::get('/admin/show/privacy-policy', [SiteSettingController::class, 'showPrivacyPolicy']);
+    Route::post('/admin/update/privacy-policy', [SiteSettingController::class, 'updatePrivacyPolicy']);
 
-Route::get('/admin/show/terms-conditions', [SiteSettingController::class, 'showTermsConditions']);
-Route::post('/admin/update/terms-conditions', [SiteSettingController::class, 'updateTermsConditions']);
+    Route::get('/admin/show/terms-conditions', [SiteSettingController::class, 'showTermsConditions']);
+    Route::post('/admin/update/terms-conditions', [SiteSettingController::class, 'updateTermsConditions']);
 
-Route::get('/admin/show/refund-policy', [SiteSettingController::class, 'showRefundPolicy']);
-Route::post('/admin/update/refund-policy', [SiteSettingController::class, 'updateRefundPolicy']);
+    Route::get('/admin/show/refund-policy', [SiteSettingController::class, 'showRefundPolicy']);
+    Route::post('/admin/update/refund-policy', [SiteSettingController::class, 'updateRefundPolicy']);
 
-Route::get('/admin/show/payment-policy', [SiteSettingController::class, 'showPaymentPolicy']);
-Route::post('/admin/update/payment-policy', [SiteSettingController::class, 'updatePaymentPolicy']);
+    Route::get('/admin/show/payment-policy', [SiteSettingController::class, 'showPaymentPolicy']);
+    Route::post('/admin/update/payment-policy', [SiteSettingController::class, 'updatePaymentPolicy']);
 
-Route::get('/admin/show/about-us', [SiteSettingController::class, 'showAboutUs']);
-Route::post('/admin/update/about-us', [SiteSettingController::class, 'updateAboutUs']);
+    Route::get('/admin/show/about-us', [SiteSettingController::class, 'showAboutUs']);
+    Route::post('/admin/update/about-us', [SiteSettingController::class, 'updateAboutUs']);
+});
 
 //Order Routes....
-Route::get('/admin/all-orders', [OrderController::class, 'shoAllOrders']);
-Route::get('/admin/order/status/{order_id}/{status_type}', [OrderController::class, 'updateStatus']);
-Route::get('/admin/status-orders/{status_type}', [OrderController::class, 'statusWiseOrder']);
-Route::get('/admin/order/edit/{id}', [OrderController::class, 'editOrder']);
-Route::post('/admin/order/update/{id}', [OrderController::class, 'updateOrder']);
+Route::middleware(['role:admin,employee,editor'])->group(function (){
+    Route::get('/admin/all-orders', [OrderController::class, 'shoAllOrders']);
+    Route::get('/admin/order/status/{order_id}/{status_type}', [OrderController::class, 'updateStatus']);
+    Route::get('/admin/status-orders/{status_type}', [OrderController::class, 'statusWiseOrder']);
+    Route::get('/admin/order/edit/{id}', [OrderController::class, 'editOrder']);
+    Route::post('/admin/order/update/{id}', [OrderController::class, 'updateOrder']);
+});
 
 //Credentials...
-Route::get('/admin/show-credentials', [AuthController::class, 'showCredentials']);
-Route::post('/admin/update-credentials', [AuthController::class, 'updateCredentials']);
+Route::middleware(['role:admin,employee,editor'])->group(function (){
+    Route::get('/admin/show-credentials', [AuthController::class, 'showCredentials']);
+    Route::post('/admin/update-credentials', [AuthController::class, 'updateCredentials']);
+});
 
 //Employees...
-Route::get('/admin/show-employees', [RoleController::class, 'showEmployee']);
-Route::get('/admin/create-employees', [RoleController::class, 'createEmployee']);
-Route::post('/admin/store-employees', [RoleController::class, 'storeEmployee']);
-Route::get('/admin/edit-employees/{id}', [RoleController::class, 'editEmployee']);
-Route::post('/admin/update-employees/{id}', [RoleController::class, 'updateEmployee']);
+Route::middleware(['role:admin'])->group(function (){
+    Route::get('/admin/show-employees', [RoleController::class, 'showEmployee']);
+    Route::get('/admin/create-employees', [RoleController::class, 'createEmployee']);
+    Route::post('/admin/store-employees', [RoleController::class, 'storeEmployee']);
+    Route::get('/admin/edit-employees/{id}', [RoleController::class, 'editEmployee']);
+    Route::post('/admin/update-employees/{id}', [RoleController::class, 'updateEmployee']);
+
+});
