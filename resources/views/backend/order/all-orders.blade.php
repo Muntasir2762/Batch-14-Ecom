@@ -38,7 +38,7 @@
               Address: {{$order->address}} <br>
               Price: {{$order->price}} <br>
           </td>
-          <td>Not Found</td>
+          <td>{{$order->courier_name}}</td>
           <td>
             <span class="badge badge-success">{{ucfirst($order->status)}}</span>
           </td>

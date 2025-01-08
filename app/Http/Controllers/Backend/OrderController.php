@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class OrderController extends Controller
 {
@@ -21,7 +22,7 @@ class OrderController extends Controller
 
 
         //Courier API Integration...
-        if($status_type == "deliverd"){
+        if($status_type == "delivered"){
             if($order->courier_name == "steadfast"){
 
                 $endPoint = "https://portal.packzy.com/api/v1/create_order";
@@ -37,6 +38,24 @@ class OrderController extends Controller
                 $customerPhone = $order->c_phone;
                 $customerAddress = $order->address;
                 $price = $order->price;
+
+                //The Header...
+                $header = [
+                    'Api-Key' => $appKey,
+                    'Secret-Key' => $secretKey,
+                    'Content-Type' => $contentType,
+                ];
+
+                //The Payloads...
+                $payLoad = [
+                    'invoice' => $invoiceNumber,
+                    'recipient_name' => $customerName,
+                    'recipient_phone' => $customerPhone,
+                    'recipient_address' => $customerAddress,
+                    'cod_amount' => $price,
+                ];
+
+               $response = Http::withHeaders($header)->post($endPoint, $payLoad);
 
             }
             elseif($order->courier_name == "redx"){
