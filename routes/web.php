@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\MessageController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\RoleController;
@@ -125,5 +126,14 @@ Route::middleware(['role:admin'])->group(function (){
     Route::post('/admin/store-employees', [RoleController::class, 'storeEmployee']);
     Route::get('/admin/edit-employees/{id}', [RoleController::class, 'editEmployee']);
     Route::post('/admin/update-employees/{id}', [RoleController::class, 'updateEmployee']);
+
+});
+
+//Messages...
+Route::middleware(['role:admin,editor'])->group(function (){
+    Route::get('/admin/show-contact-messages', [MessageController::class, 'showContactMessages']);
+    Route::get('/admin/delete-contact-message/{id}', [MessageController::class, 'deleteContactMessages']);
+    Route::get('/admin/show-return-req-messages', [MessageController::class, 'showReturnReqMessages']);
+    Route::get('admin/delete-return-req-message/{id}', [MessageController::class, 'deleteReturnReqMessages']);
 
 });

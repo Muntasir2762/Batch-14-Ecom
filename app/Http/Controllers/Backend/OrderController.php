@@ -56,6 +56,7 @@ class OrderController extends Controller
                 ];
 
                $response = Http::withHeaders($header)->post($endPoint, $payLoad);
+               $responseData = $response->json();
 
             }
             elseif($order->courier_name == "redx"){
