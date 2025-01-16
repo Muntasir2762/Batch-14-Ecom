@@ -62,6 +62,14 @@ Route::middleware(['role:admin,editor'])->group(function (){
     Route::get('/admin/delete-product/{id}', [ProductController::class, 'delete'])->name('product.delete');
     Route::get('/admin/edit-product/{id}', [ProductController::class, 'edit'])->name('product.edit');
     Route::post('/admin/update-product/{id}', [ProductController::class, 'update'])->name('product.update');
+
+    //Review Routes...
+    Route::get('/admin/create-review', [ProductController::class, 'createReview'])->name('review.create');
+    Route::post('/admin/store-review', [ProductController::class, 'storeReview'])->name('review.store');
+    Route::get('/admin/show-reviews', [ProductController::class, 'showReview'])->name('review.show');
+    Route::get('/admin/delete-review/{id}', [ProductController::class, 'deleteReview'])->name('review.delete');
+    Route::get('/admin/edit-review/{id}', [ProductController::class, 'editReview'])->name('review.edit');
+    Route::post('/admin/update-review/{id}', [ProductController::class, 'updateReview'])->name('review.update');
 });
 
 
