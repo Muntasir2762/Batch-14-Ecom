@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AuthController;
+use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\MessageController;
 use App\Http\Controllers\Backend\OrderController;
@@ -70,6 +71,14 @@ Route::middleware(['role:admin,editor'])->group(function (){
     Route::get('/admin/delete-review/{id}', [ProductController::class, 'deleteReview'])->name('review.delete');
     Route::get('/admin/edit-review/{id}', [ProductController::class, 'editReview'])->name('review.edit');
     Route::post('/admin/update-review/{id}', [ProductController::class, 'updateReview'])->name('review.update');
+
+    //Banners...
+    Route::get('/admin/show-banners', [BannerController::class, 'showBanners'])->name('banner.show');
+    Route::get('/admin/create-banners', [BannerController::class, 'createBanners'])->name('banner.create');
+    Route::get('/admin/store-banners', [BannerController::class, 'storeBanners'])->name('banner.store');
+    Route::get('/admin/edit-banners/{id}', [BannerController::class, 'editBanners'])->name('banner.edit');
+    Route::post('/admin/update-banners/{id}', [BannerController::class, 'updateBanners'])->name('banner.update');
+    Route::post('/admin/delete-banners/{id}', [BannerController::class, 'deleteBanners'])->name('banner.delete');
 });
 
 

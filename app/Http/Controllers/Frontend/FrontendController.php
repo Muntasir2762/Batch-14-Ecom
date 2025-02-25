@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Cart;
 use App\Models\ContactMessage;
 use App\Models\Order;
@@ -19,7 +20,8 @@ class FrontendController extends Controller
         $regularProducts = Product::where('product_type', 'regular')->get();
         $newProducts = Product::where('product_type', 'new')->get();
         $discountProducts = Product::where('product_type', 'discount')->get();
-        return view ('frontend.index', compact('hotProducts', 'regularProducts', 'newProducts', 'discountProducts'));
+        $banners = Banner::get();
+        return view ('frontend.index', compact('hotProducts', 'regularProducts', 'newProducts', 'discountProducts', 'banners'));
     }
 
     public function productDetails ($slug)
