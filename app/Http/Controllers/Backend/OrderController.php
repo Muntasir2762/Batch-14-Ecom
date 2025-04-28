@@ -106,4 +106,36 @@ class OrderController extends Controller
         toastr()->success('Order Updated Successfully!');
         return redirect()->back();
     }
+
+    public function sellReport (Request $request)
+    {
+        if(isset($request->from) && isset($request->to)){
+            $orders = Order::whereDate('created_at', '>=', $request->from)->whereDate('created_at', '<=', $request->to)->where('status', 'delivered')->with('orderDetails')->get();
+        }
+        else{
+            $orders = Order::whereYear('created_at', now()->year)->whereMonth('created_at', now()->month)->where('status', 'delivered')->with('orderDetails')->get();
+        }
+
+        $totalOrder = $orders->count();
+        $totalSell = $orders->sum('price');
+
+        $totalBuyingCost = 0;
+        $totalCharge = 0;
+
+        foreach ($orders as $order) {
+            $totalCharge += $order->area; // Sum all courier/delivery charges
+
+            foreach ($order->orderDetails as $details) {
+                $buyingPrice = $details->product->buying_price ?? 0; // fallback to 0 if not found
+                $qty = $details->qty ?? 0;
+
+                $totalBuyingCost += ($buyingPrice * $qty);
+            }
+        }
+
+        // Now calculate profit
+        $profitAmount = $totalSell - $totalBuyingCost - $totalCharge;
+
+        return view('backend.order.report', compact('orders', 'totalOrder', 'totalSell', 'totalCharge', 'profitAmount'));
+    }
 }

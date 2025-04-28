@@ -154,3 +154,9 @@ Route::middleware(['role:admin,editor'])->group(function (){
     Route::get('admin/delete-return-req-message/{id}', [MessageController::class, 'deleteReturnReqMessages']);
 
 });
+
+//Accounts...
+Route::middleware(['role:admin'])->group(function (){
+    Route::get('/admin/accounts-reports', [OrderController::class, 'sellReport']);
+
+});
